@@ -7,7 +7,7 @@ import java.util.Random;
 
 
 public class Machine {
-	public void lotteryNumber() {
+	public int lotteryNumber() {
 
 		ArrayList<Integer> bingoNumber = new ArrayList<Integer>();
 
@@ -17,7 +17,10 @@ public class Machine {
 
 		Collections.shuffle(bingoNumber);
 
-		System.out.println("☆☆☆　当選番号は " + bingoNumber.get(1) + " です☆☆☆");
+		String str = String.format("%2d", bingoNumber.get(1));
+
+		System.out.println("☆☆☆　当選番号は " + str + " です☆☆☆");
+		return bingoNumber.get(1);
 
 
 
