@@ -101,44 +101,33 @@ public class SheetBean {
 			if(listB[i] == bingoNumber) {
 				listB[i] = 99;	
 				check++;
-			}
-		}
-		for(int i = 0;i<5;i++) {
-			if(listI[i] == bingoNumber) {
+			}else if(listI[i] == bingoNumber) {
 				listI[i] = 99;
 				check++;
-			}
-		}
-		for(int i = 0;i<5;i++) {
-			if(listG[i] == bingoNumber) {
+			}else if(listG[i] == bingoNumber) {
 				listG[i] = 99;	
 				check++;
-			}
-		}
-		for(int i = 0;i<5;i++) {
-			if(listG[i] == bingoNumber) {
+			}else if(listG[i] == bingoNumber) {
 				listG[i] = 99;	
 				check++;
-			}
-		}
-		for(int i = 0;i<5;i++) {
-			if(listO[i] == bingoNumber) {
+			}else if(listG[i] == bingoNumber) {
+				listG[i] = 99;	
+				check++;
+			}else if(listO[i] == bingoNumber) {
 				listO[i] = 99;	
 				check++;
 			}
-		}
-		if(check >0) {
+		}if(check >0) {
 			hitFlag = true;
 			System.out.println("☆☆☆☆   あたりです   ☆☆☆☆");
 
 		}else {
 			hitFlag = false;
 			System.out.println("。。　残念… ハズレです   。。。");
-
 		}
 		return hitFlag;
 	}
-	
+
 	//ビンゴしたかどうか
 	public boolean isBingo() {
 		boolean bingoFlag = true;
@@ -149,7 +138,62 @@ public class SheetBean {
 		int countO = 0;
 
 		int reachCount = 0;
-
+		
+/*		for(int i = 0;i<5;i++) {
+			reachCount = 0;
+			if(listB[i] == 99) {
+				countB++;
+				reachCount++;
+			}if(listI[i] == 99) {
+				countI++;
+				reachCount++;
+			}if(listN[i] == 99) {
+				countN++;
+				reachCount++;
+			}if(listG[i] == 99) {
+				countG++;
+				reachCount++;
+			}if(listO[i] == 99) {
+				countO++;
+				reachCount++;
+			}
+			if(reachCount == 5) {
+				reachAndbingoCheck( reachCount, countB
+						,countI,countN, countG, countO);
+				bingoFlag = true;
+				break;	
+			}else if(reachCount == 4) {
+				reachAndbingoCheck( reachCount, countB
+						,countI,countN, countG, countO);
+				bingoFlag = false;
+				break;
+			}
+		}
+		if(reachCount < 4)
+			bingoFlag = false;
+		if(
+				(countB == 5)||	
+				(countI == 5)||	
+				(countN == 5)||	
+				(countG == 5)||	
+				(countO == 5)
+				) {
+			reachAndbingoCheck( reachCount, countB
+					,countI,countN, countG, countO);
+			bingoFlag = true;
+		}else if(
+				(countB == 4)||	
+				(countI == 4)||	
+				(countN == 4)||	
+				(countG == 4)||	
+				(countO == 4)
+				) {
+			reachAndbingoCheck( reachCount, countB
+					,countI,countN, countG, countO);
+			bingoFlag = false;
+		}else
+			bingoFlag = false;
+*/
 		// 横のビンゴ判定
 		for(int i = 0;i<5;i++) {
 			reachCount = 0;
@@ -221,7 +265,7 @@ public class SheetBean {
 
 	}
 
-    // ビンゴとリーチ判定
+	// ビンゴとリーチ判定
 	public void reachAndbingoCheck(int reachCount,int countB
 			,int countI,int countN,int countG,int countO) {
 		if((reachCount == 5)||(
@@ -250,7 +294,7 @@ public class SheetBean {
 			System.out.println("　　　　　　　　　　　　　　　　");
 		}
 	}
-	 
+
 	// 表示メソッド
 	public void print(int bingoNumber) {
 		System.out.println("   B   I   N   G   O ");
@@ -259,28 +303,28 @@ public class SheetBean {
 		for(int j = 0;j<5;j++) {
 			System.out.print(" ┃");
 			if(listB[j] == 99) {
-				System.out.print("☆");
+				System.out.print("★");
 			}else {
 				String str = String.format("%2d", this.listB[j]);
 				System.out.print(str);
 			}System.out.print("┃");
 			if(listI[j] == 99) {
-				System.out.print("☆");
+				System.out.print("★");
 			}else {
 				System.out.print(this.listI[j]);
 			}System.out.print("┃");
 			if(listN[j] == 99) {
-				System.out.print("☆");
+				System.out.print("★");
 			}else {
 				System.out.print(this.listN[j]);
 			}System.out.print("┃");
 			if(listG[j] == 99) {
-				System.out.print("☆");
+				System.out.print("★");
 			}else {
 				System.out.print(this.listG[j]);
 			}System.out.print("┃");
 			if(listO[j] == 99) {
-				System.out.print("☆");
+				System.out.print("★");
 			}else {
 				System.out.print(this.listO[j]);
 			}System.out.print("┃");
