@@ -136,10 +136,9 @@ public class SheetBean {
 			System.out.println("。。　残念… ハズレです   。。。");
 
 		}
-		System.out.println("hitFlag = "+hitFlag);
 		return hitFlag;
 	}
-	/*
+	
 	//ビンゴしたかどうか
 	public boolean isBingo() {
 		boolean bingoFlag = true;
@@ -251,7 +250,7 @@ public class SheetBean {
 			System.out.println("　　　　　　　　　　　　　　　　");
 		}
 	}
-	 */
+	 
 	// 表示メソッド
 	public void print(int bingoNumber) {
 		System.out.println("   B   I   N   G   O ");
