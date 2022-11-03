@@ -138,8 +138,9 @@ public class SheetBean {
 		int countO = 0;
 
 		int reachCount = 0;
-		
-/*		for(int i = 0;i<5;i++) {
+
+		for(int i = 0;i<5;i++) {
+
 			reachCount = 0;
 			if(listB[i] == 99) {
 				countB++;
@@ -157,114 +158,33 @@ public class SheetBean {
 				countO++;
 				reachCount++;
 			}
-			if(reachCount == 5) {
+			if((reachCount == 5)||(
+					(countB == 5)||	
+					(countI == 5)||	
+					(countN == 5)||	
+					(countG == 5)||	
+					(countO == 5)
+					) ) {
 				reachAndbingoCheck( reachCount, countB
 						,countI,countN, countG, countO);
 				bingoFlag = true;
-				break;	
-			}else if(reachCount == 4) {
+				return bingoFlag;
+			}else if((reachCount == 4)||(
+					(countB == 4)||	
+					(countI == 4)||	
+					(countN == 4)||	
+					(countG == 4)||	
+					(countO == 4)
+					) ){
 				reachAndbingoCheck( reachCount, countB
 						,countI,countN, countG, countO);
 				bingoFlag = false;
-				break;
-			}
-		}
-		if(reachCount < 4)
-			bingoFlag = false;
-		if(
-				(countB == 5)||	
-				(countI == 5)||	
-				(countN == 5)||	
-				(countG == 5)||	
-				(countO == 5)
-				) {
-			reachAndbingoCheck( reachCount, countB
-					,countI,countN, countG, countO);
-			bingoFlag = true;
-		}else if(
-				(countB == 4)||	
-				(countI == 4)||	
-				(countN == 4)||	
-				(countG == 4)||	
-				(countO == 4)
-				) {
-			reachAndbingoCheck( reachCount, countB
-					,countI,countN, countG, countO);
-			bingoFlag = false;
-		}else
-			bingoFlag = false;
-*/
-		// 横のビンゴ判定
-		for(int i = 0;i<5;i++) {
-			reachCount = 0;
-			if(listB[i] == 99) {
-				reachCount++;
-			}if(listI[i] == 99) {
-				reachCount++;
-			}if(listN[i] == 99) {
-				reachCount++;
-			}if(listG[i] == 99) {
-				reachCount++;
-			}if(listO[i] == 99) {
-				reachCount++;
-			}
-			if(reachCount == 5) {
-				reachAndbingoCheck( reachCount, countB
-						,countI,countN, countG, countO);
-				bingoFlag = true;
-				break;	
-			}else if(reachCount == 4) {
-				reachAndbingoCheck( reachCount, countB
-						,countI,countN, countG, countO);
+			}else {
 				bingoFlag = false;
-				break;
 			}
 		}
-		if(reachCount < 4)
-			bingoFlag = false;
-
-		// 縦のビンゴ判定
-
-		for(int i = 0;i<5;i++) {
-			if(listB[i] == 99) {
-				countB++;
-			}if(listI[i] == 99){
-				countI++; 
-			}if(listN[i] == 99){
-				countN++; 
-			}if(listG[i] == 99){
-				countG++; 
-			}if(listO[i] == 99){
-				countO++; 
-			}	
-		}
-		if(
-				(countB == 5)||	
-				(countI == 5)||	
-				(countN == 5)||	
-				(countG == 5)||	
-				(countO == 5)
-				) {
-			reachAndbingoCheck( reachCount, countB
-					,countI,countN, countG, countO);
-			bingoFlag = true;
-		}else if(
-				(countB == 4)||	
-				(countI == 4)||	
-				(countN == 4)||	
-				(countG == 4)||	
-				(countO == 4)
-				) {
-			reachAndbingoCheck( reachCount, countB
-					,countI,countN, countG, countO);
-			bingoFlag = false;
-		}else
-			bingoFlag = false;
-
 		return bingoFlag;
-
 	}
-
 	// ビンゴとリーチ判定
 	public void reachAndbingoCheck(int reachCount,int countB
 			,int countI,int countN,int countG,int countO) {
