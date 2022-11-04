@@ -128,20 +128,27 @@ public class SheetBean {
 		return hitFlag;
 	}
 
-	//ビンゴしたかどうか
+	// ヒットしたマスのカウント
 	public boolean isBingo() {
 		boolean bingoFlag = true;
+		// 縦のカウント
 		int countB = 0;
 		int countI = 0;
 		int countN = 0;
 		int countG = 0;
 		int countO = 0;
-
+		// 横のカウント
 		int reachCount = 0;
+		// クロスのカウント
+		int crossA = 0;
+		int crossB = 0;
 
 		for(int i = 0;i<5;i++) {
 
 			reachCount = 0;
+			crossA = 0;
+			crossB = 0;
+
 			if(listB[i] == 99) {
 				countB++;
 				reachCount++;
@@ -157,62 +164,80 @@ public class SheetBean {
 			}if(listO[i] == 99) {
 				countO++;
 				reachCount++;
+			}if(listB[0] == 99) {
+				crossA++;
+			}if(listI[1] == 99) {
+				crossA++;
+			}if(listN[2] == 99) {
+				crossA++;
+			}if(listG[3] == 99) {
+				crossA++;
+			}if(listO[4] == 99) {
+				crossA++;
+			}if(listB[4] == 99) {
+				crossB++;
+			}if(listI[3] == 99) {
+				crossB++;
+			}if(listN[2] == 99) {
+				crossB++;
+			}if(listG[1] == 99) {
+				crossB++;
+			}if(listO[0] == 99) {
+				crossB++;
 			}
-			if((reachCount == 5)||(
-					(countB == 5)||	
-					(countI == 5)||	
-					(countN == 5)||	
-					(countG == 5)||	
-					(countO == 5)
-					) ) {
-				reachAndbingoCheck( reachCount, countB
-						,countI,countN, countG, countO);
-				bingoFlag = true;
-				return bingoFlag;
-			}else if((reachCount == 4)||(
-					(countB == 4)||	
-					(countI == 4)||	
-					(countN == 4)||	
-					(countG == 4)||	
-					(countO == 4)
-					) ){
-				reachAndbingoCheck( reachCount, countB
-						,countI,countN, countG, countO);
-				bingoFlag = false;
-			}else {
-				bingoFlag = false;
-			}
+		}if(reachAndbingoCheck( reachCount, countB
+				, countI, countN, countG, countO
+				, crossA, crossB)) {
+			bingoFlag = true;
+			return bingoFlag;
+		}else if(reachAndbingoCheck( reachCount, countB
+				, countI, countN, countG, countO
+				, crossA, crossB)) {
+			bingoFlag = false;
+		}else {
+			bingoFlag = false;
+
 		}
 		return bingoFlag;
 	}
+
 	// ビンゴとリーチ判定
-	public void reachAndbingoCheck(int reachCount,int countB
-			,int countI,int countN,int countG,int countO) {
-		if((reachCount == 5)||(
+	public boolean reachAndbingoCheck(int reachCount,int countB
+			,int countI,int countN,int countG,int countO
+			,int crossA,int crossB) {
+		boolean checkFlg = true;
+		if((reachCount == 5)||
 				(countB == 5)||
 				(countI == 5)||	
 				(countN == 5)||	
 				(countG == 5)||	
-				(countO == 5))){
+				(countO == 5)||
+				(crossA == 5)||
+				(crossB == 5) 
+				) {
 			System.out.println("☆☆☆☆☆   BINGO!!   ☆☆☆☆☆");
 			System.out.println("　　　　　　　　　　　　　　　　");
 			System.out.println("☆☆☆☆☆   BINGO!!   ☆☆☆☆☆");
 			System.out.println("　　　　　　　　　　　　　　　　");
 			System.out.println("☆☆☆☆☆   BINGO!!   ☆☆☆☆☆");
 			System.out.println("　　　　　　　　　　　　　　　　");
-		}else if((reachCount == 4)||(
+			checkFlg = true;
+		}else if((reachCount == 4)||
 				(countB == 4)||	
 				(countI == 4)||	
 				(countN == 4)||	
 				(countG == 4)||	
-				(countO == 4))){
+				(countO == 4)||
+				(crossA == 4)||
+				(crossB == 4) 
+				) {
 			System.out.println("☆☆☆☆☆   リーチ中  ☆☆☆☆☆");
 			System.out.println("　　　　　　　　　　　　　　　　");
-			System.out.println("☆☆☆☆☆   リーチ中  ☆☆☆☆☆");
-			System.out.println("　　　　　　　　　　　　　　　　");
-			System.out.println("☆☆☆☆☆   リーチ中  ☆☆☆☆☆");
-			System.out.println("　　　　　　　　　　　　　　　　");
+			checkFlg = false;
+		}else {
+			checkFlg = false;
 		}
+		return checkFlg;
 	}
 
 	// 表示メソッド
