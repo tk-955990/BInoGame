@@ -131,27 +131,26 @@ public class SheetBean {
 	// ヒットしたマスのカウント
 	public boolean isBingo() {
 		boolean bingoFlag = true;
-		
+
 		// 縦のカウント
 		int countB = 0;
 		int countI = 0;
 		int countN = 0;
 		int countG = 0;
 		int countO = 0;
-		
+
 		// 横のカウント
 		int reachCount = 0;
-		
+
 		// クロスのカウント
 		int crossA = 0;
 		int crossB = 0;
-
+		int viewCount = 0;
 		for(int i = 0;i<5;i++) {
 
 			reachCount = 0;
 			crossA = 0;
 			crossB = 0;
-
 			if(listB[i] == 99) {
 				countB++;
 				reachCount++;
@@ -188,24 +187,35 @@ public class SheetBean {
 			}if(listO[0] == 99) {
 				crossB++;
 
-			}if(reachAndbingoCheck( reachCount, countB
+			// ビンゴ判定 	
+			}if(bingoCheck( reachCount, countB
 					, countI, countN, countG, countO
 					, crossA, crossB) == true) {
 				bingoFlag = true;
 				return bingoFlag;
-			}else if(reachAndbingoCheck( reachCount, countB
+			}else if(bingoCheck( reachCount, countB
 					, countI, countN, countG, countO
 					, crossA, crossB) == false) {
-				bingoFlag = false;
-			}else {
+				 
+				// リーチ判定
+				if(reachCheck(reachCount, countB
+						, countI, countN, countG, countO
+						, crossA, crossB) == true) {
+					
+					// リーチ重複表示防止
+					if(viewCount == 0) {
+						reachView();
+						viewCount++;
+					}
+				}
 				bingoFlag = false;
 			}
 		}
 		return bingoFlag;
 	}
 
-	// ビンゴとリーチ判定
-	public boolean reachAndbingoCheck(int reachCount,int countB
+	// ビンゴ判定
+	public boolean bingoCheck(int reachCount,int countB
 			,int countI,int countN,int countG,int countO
 			,int crossA,int crossB) {
 		boolean checkFlg = true;
@@ -225,7 +235,18 @@ public class SheetBean {
 			System.out.println("☆☆☆☆☆   BINGO!!   ☆☆☆☆☆");
 			System.out.println("　　　　　　　　　　　　　　　　");
 			checkFlg = true;
-		}else if((reachCount == 4)||
+		}else {
+			checkFlg = false;
+		}
+		return checkFlg;
+	}
+
+	// リーチ判定
+	public boolean reachCheck(int reachCount,int countB
+			,int countI,int countN,int countG,int countO
+			,int crossA,int crossB) {
+		boolean reachFlg = true;
+		if((reachCount == 4)||
 				(countB == 4)||	
 				(countI == 4)||	
 				(countN == 4)||	
@@ -234,16 +255,24 @@ public class SheetBean {
 				(crossA == 4)||
 				(crossB == 4) 
 				) {
-			System.out.println("☆☆☆☆☆   リーチ中  ☆☆☆☆☆");
-			System.out.println("　　　　　　　　　　　　　　　　");
-			checkFlg = false;
+			reachFlg = true;
 		}else {
-			checkFlg = false;
+			reachFlg = false;
 		}
-		return checkFlg;
+		return reachFlg;
 	}
 
-	// 表示メソッド
+	//　リーチ表示
+	public void reachView() {
+		System.out.println("☆☆☆☆☆   リーチ中  ☆☆☆☆☆");
+		System.out.println("　　　　　　　　　　　　　　　　");
+		System.out.println("☆☆☆☆☆   リーチ中  ☆☆☆☆☆");
+		System.out.println("　　　　　　　　　　　　　　　　");
+		System.out.println("☆☆☆☆☆   リーチ中  ☆☆☆☆☆");
+		System.out.println("　　　　　　　　　　　　　　　　");
+	}
+
+	// ビンゴシート表示メソッド
 	public void print(int bingoNumber) {
 		System.out.println("   B   I   N   G   O ");
 		System.out.println(" ┏━┳━┳━┳━┳━┓");

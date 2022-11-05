@@ -6,6 +6,7 @@ public class Game {
 
 	static Machine machine = new Machine();
 	static int bingoNumber ;
+	
 	public static void main(String args[]) {
 		SheetBean   sheetBean   = new SheetBean();
 		System.out.println("                                ");
