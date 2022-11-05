@@ -131,14 +131,17 @@ public class SheetBean {
 	// ヒットしたマスのカウント
 	public boolean isBingo() {
 		boolean bingoFlag = true;
+		
 		// 縦のカウント
 		int countB = 0;
 		int countI = 0;
 		int countN = 0;
 		int countG = 0;
 		int countO = 0;
+		
 		// 横のカウント
 		int reachCount = 0;
+		
 		// クロスのカウント
 		int crossA = 0;
 		int crossB = 0;
@@ -184,19 +187,19 @@ public class SheetBean {
 				crossB++;
 			}if(listO[0] == 99) {
 				crossB++;
-			}
-		}if(reachAndbingoCheck( reachCount, countB
-				, countI, countN, countG, countO
-				, crossA, crossB)) {
-			bingoFlag = true;
-			return bingoFlag;
-		}else if(reachAndbingoCheck( reachCount, countB
-				, countI, countN, countG, countO
-				, crossA, crossB)) {
-			bingoFlag = false;
-		}else {
-			bingoFlag = false;
 
+			}if(reachAndbingoCheck( reachCount, countB
+					, countI, countN, countG, countO
+					, crossA, crossB) == true) {
+				bingoFlag = true;
+				return bingoFlag;
+			}else if(reachAndbingoCheck( reachCount, countB
+					, countI, countN, countG, countO
+					, crossA, crossB) == false) {
+				bingoFlag = false;
+			}else {
+				bingoFlag = false;
+			}
 		}
 		return bingoFlag;
 	}
