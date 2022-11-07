@@ -6,7 +6,7 @@ public class Game {
 
 	static Machine machine = new Machine();
 	static int bingoNumber ;
-	
+
 	public static void main(String args[]) {
 		SheetBean   sheetBean   = new SheetBean();
 		System.out.println("                                ");
@@ -22,6 +22,7 @@ public class Game {
 					sheetBean.print(bingoNumber);
 					break;
 				}
+				sheetBean.isReach();
 			}  
 			sheetBean.print(bingoNumber);
 			while(true ) {
@@ -29,12 +30,12 @@ public class Game {
 				System.out.println("　はい : 1   いいえ : 2 ");
 				Scanner scanner = new Scanner(System.in);
 				String next = scanner.next();
-				
+
 				// 入力文字数の判定
 				if(next.length() != 1) {
 					continue;
 				}
-				
+
 				// ゲーム続行及び終了の判定
 				char charNext = next.charAt(0);
 				if((charNext =='1')||(charNext =='１')) {
