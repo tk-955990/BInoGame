@@ -129,10 +129,66 @@ public class SheetBean {
 	}
 
 	// ヒットしたマスのカウント
+
 	public boolean isBingo() {
 		boolean bingoFlag = true;
 
+		int[][] bingoSheet = new int[5][5];
+		bingoSheet[0] = listB;
+		bingoSheet[1] = listI;
+		bingoSheet[2] = listN;
+		bingoSheet[3] = listG;
+		bingoSheet[4] = listO;
+		
 		// 縦のカウント
+		int verticalCount = 0;
+		// 横のカウント
+		int sideCount = 0;
+
+		for(int j = 0;j<bingoSheet[0].length;j++) {
+			verticalCount = 0;
+			sideCount = 0;
+			for(int i = 0;i<bingoSheet.length;i++) {
+				if(bingoSheet[i][j] == 99) {
+					sideCount++;			
+				}if(bingoSheet[j][i] == 99) {
+					verticalCount++;
+				}
+			}
+			// 横のビンゴ判定
+			if(sideCount == 5) {
+				bingoFlag = true;
+				bingoView();
+				return bingoFlag;
+			}
+			// 縦のビンゴ判定
+			if(verticalCount == 5) {
+				bingoFlag = true;
+				bingoView();
+				return bingoFlag;
+			}
+			// クロスのビンゴ判定
+		}if(((bingoSheet[0][0] == 99)&&
+				(bingoSheet[1][1] == 99)&&
+				(bingoSheet[2][2] == 99)&&
+				(bingoSheet[3][3] == 99)&&
+				(bingoSheet[4][4] == 99)
+				) ||
+				((bingoSheet[0][4] == 99)&&
+			     (bingoSheet[1][3] == 99)&&
+				 (bingoSheet[2][2] == 99)&&
+				 (bingoSheet[3][1] == 99)&&
+				 (bingoSheet[4][0] == 99))
+				) {
+			bingoFlag = true; 
+			bingoView();
+			return bingoFlag;
+		}else {
+			bingoFlag = false;
+		}
+		return bingoFlag;
+	}	
+/*		// 縦のカウント
 		int countB = 0;
 		int countI = 0;
 		int countN = 0;
@@ -213,7 +269,19 @@ public class SheetBean {
 		}
 		return bingoFlag;
 	}
-
+*/
+	public void bingoView() {
+		System.out.println("☆☆☆☆☆   BINGO!!   ☆☆☆☆☆");
+		System.out.println("　　　　　　　　　　　　　　　　");
+		System.out.println("☆☆☆☆☆   BINGO!!   ☆☆☆☆☆");
+		System.out.println("　　　　　　　　　　　　　　　　");
+		System.out.println("☆☆☆☆☆   BINGO!!   ☆☆☆☆☆");
+		System.out.println("　　　　　　　　　　　　　　　　");
+	}
+	
+	
+	
+	
 	// ビンゴ判定
 	public boolean bingoCheck(int reachCount,int countB
 			,int countI,int countN,int countG,int countO
